@@ -25,3 +25,13 @@
 #container a {
   text-decoration: none;
 }
+
+ion-item {
+  display: block !important;
+}
+
+ion-input {
+  display: block;
+  width: 100%;
+  margin-top: 8px;
+}

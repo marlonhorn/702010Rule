@@ -1,20 +1,36 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Blank
+      70/20/10 Rule Calculator
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="false">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
+      <ion-title size="large">Test</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+    <div id="container">
+      <strong style="display:block;">Einkommenshäufigkeit</strong>
+
+      <ion-radio-group [(ngModel)]="frequenz">
+        <ion-radio value="monthly">Monatlich</ion-radio><br />
+        <ion-radio value="annual">Jährlich</ion-radio>
+      </ion-radio-group>
+
+      <ion-list>
+          <ion-item>
+             <ion-input label="Einkommen nach Steuern" labelPlacement="stacked" placeholder="Wert eingeben" [(ngModel)]="einkommenNetto"></ion-input>
+          </ion-item>
+      </ion-list>
+
+      <ion-toggle [(ngModel)]="showKategorien">Wesentliche Kosten nach Kategorie anzeigen</ion-toggle><br /><br />
+
+      <ion-button (click)="berechnen()">Berechnen</ion-button>
+
+    </div>
+
 </ion-content>

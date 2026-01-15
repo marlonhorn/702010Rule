@@ -11,6 +11,22 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  {
+    path: 'ergebnis',
+    loadChildren: () => import('./ergebnis/ergebnis.module').then( m => m.ErgebnisPageModule)
+  },
+  {
+    path: 'hilfetext',
+    loadChildren: () => import('./hilfetext/hilfetext.module').then( m => m.HilfetextPageModule)
+  },
+  {
+    path: 'gespeicherte-ergebnisse',
+    loadChildren: () => import('./gespeicherte-ergebnisse/gespeicherte-ergebnisse.module').then( m => m.GespeicherteErgebnissePageModule)
+  },
+  {
+    path: 'hilfetext',
+    loadChildren: () => import('./hilfetext/hilfetext.module').then( m => m.HilfetextPageModule)
+  },
 ];
 
 @NgModule({
