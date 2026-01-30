@@ -23,30 +23,27 @@
           <ion-label style="font-weight: 500; font-size: 16px;">Einkommenshäufigkeit</ion-label>
         </ion-item>
 
-        <ion-item lines="none">
-          <ion-radio value="monthly" [(ngModel)]="frequenz" slot="start"></ion-radio>
-          <ion-label>Monatlich</ion-label>
-        </ion-item>
+        <ion-radio-group [(ngModel)]="frequenz" name="frequenzGroup">
+          <ion-item lines="none">
+            <ion-label>Monatlich</ion-label>
+            <ion-radio slot="start" value="monthly"></ion-radio>
+          </ion-item>
 
-        <ion-item lines="none">
-          <ion-radio value="annual" [(ngModel)]="frequenz" slot="start"></ion-radio>
-          <ion-label>Jährlich</ion-label>
-        </ion-item>
+          <ion-item lines="none">
+            <ion-label>Jährlich</ion-label>
+            <ion-radio slot="start" value="annual"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
 
         <ion-item>
+          <ion-label position="stacked" style="font-weight: 500; font-size: 16px;">Nettoeinkommen</ion-label>
           <ion-input 
-            label="Einkommen nach Steuern" 
-            labelPlacement="floating" 
             placeholder="z.B. 3000" 
-            [(ngModel)]="einkommenNetto"
-            type="number">
+            [(ngModel)]="einkommenNettoFormatted"
+            (ngModelChange)="formatierePunkteEingabe($event)"
+            type="text"
+            style="font-size: 16px;">
           </ion-input>
-        </ion-item>
-
-        <ion-item>
-          <ion-toggle [(ngModel)]="showKategorien">
-            Kategorien anzeigen
-          </ion-toggle>
         </ion-item>
       </ion-list>
 

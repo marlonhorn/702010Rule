@@ -7,15 +7,13 @@ import { IonicModule } from '@ionic/angular';
 import { ErgebnisPageRoutingModule } from './ergebnis-routing.module';
 
 import { ErgebnisPage } from './ergebnis.page';
-import { RoundPipe } from '../round.pipe';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ErgebnisPageRoutingModule,
-    RoundPipe
+    ErgebnisPageRoutingModule
   ],
   declarations: [ErgebnisPage]
 })

@@ -16,26 +16,34 @@
   </div>
 
   <ion-list *ngIf="rechnungen.length > 0">
-    <ion-item-sliding *ngFor="let rechnung of rechnungen">
-      <ion-item>
-        <ion-label>
-          <h2><strong>€ {{ rechnung.einkommen }}</strong></h2>
-          <p>{{ rechnung.datum | date: 'dd.MM.yyyy HH:mm' }}</p>
-          <p>70% Grundbedarf: € {{ rechnung.gesamterGrundbedarf70 }}</p>
-          <p>20% Sparen: € {{ rechnung.sparenUndSchulden20 }}</p>
-          <p>10% Lifestyle: € {{ rechnung.lifestyleInvestments10 }}</p>
-        </ion-label>
-      </ion-item>
-      <ion-item-options side="end">
-        <ion-item-option color="danger" (click)="deleteRechnung(rechnung.id)">
-          <ion-icon name="trash"></ion-icon>
-          Löschen
-        </ion-item-option>
-      </ion-item-options>
-    </ion-item-sliding>
+    <ion-item *ngFor="let rechnung of rechnungen">
+      <ion-label>
+        <h2><strong>€ {{ rechnung.einkommen | number: '1.2-2' }}</strong></h2>
+        <p>{{ rechnung.datum | date: 'dd.MM.yyyy HH:mm' }}</p>
+        <p>70% Grundbedarf: € {{ rechnung.gesamterGrundbedarf70 | number: '1.2-2' }}</p>
+        <p>20% Sparen: € {{ rechnung.sparenUndSchulden20 | number: '1.2-2' }}</p>
+        <p>10% Lifestyle: € {{ rechnung.lifestyleInvestments10 | number: '1.2-2' }}</p>
+        
+        <div *ngIf="rechnung.zeigeKategorien && rechnung.wohnen > 0" style="margin-top: 8px; font-size: 12px; color: #666;">
+          <p style="margin: 2px 0;">Wohnen: € {{ rechnung.wohnen | number: '1.2-2' }}</p>
+          <p style="margin: 2px 0;">Essen: € {{ rechnung.essen | number: '1.2-2' }}</p>
+          <p style="margin: 2px 0;">Transport: € {{ rechnung.transport | number: '1.2-2' }}</p>
+          <p style="margin: 2px 0;">Nebenkosten: € {{ rechnung.nebenkosten | number: '1.2-2' }}</p>
+          <p style="margin: 2px 0;">Versicherungen: € {{ rechnung.versicherungen | number: '1.2-2' }}</p>
+        </div>
+
+        <div *ngIf="rechnung.kommentar" style="margin-top: 8px; font-size: 12px;">
+          <p style="margin: 2px 0;"><strong>Kommentar:</strong> {{ rechnung.kommentar }}</p>
+        </div>
+      </ion-label>
+      <ion-button slot="end" color="danger" size="small" (click)="rechnungLoeschen(rechnung.id)">
+        <ion-icon name="trash" slot="start"></ion-icon>
+        Löschen
+      </ion-button>
+    </ion-item>
   </ion-list>
 
-  <ion-button *ngIf="rechnungen.length > 0" color="danger" expand="block" (click)="deleteAll()" style="margin: 20px;">
+  <ion-button *ngIf="rechnungen.length > 0" color="danger" expand="block" (click)="alleLoeschen()" style="margin: 20px;">
     Alle löschen
   </ion-button>
 </ion-content>

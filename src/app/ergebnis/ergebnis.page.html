@@ -23,7 +23,7 @@
           <ion-input 
             label="Einkommen nach Steuern" 
             [(ngModel)]="einkommenNetto" 
-            (ngModelChange)="calcPercentiles100()" 
+            (ngModelChange)="berechneAufteilung()" 
             labelPlacement="stacked" 
             placeholder="z.B. 3000"
             type="number">
@@ -33,9 +33,8 @@
         <ion-item>
           <ion-input 
             label="Wesentliche Kosten (70%)" 
-            [(ngModel)]="gesamterGrundbedarf70" 
+            [value]="(gesamterGrundbedarf70 | number: '1.2-2')" 
             labelPlacement="stacked" 
-            placeholder="wird berechnet"
             disabled>
           </ion-input>
         </ion-item>
@@ -43,9 +42,8 @@
         <ion-item>
           <ion-input 
             label="Sparen & Schulden (20%)" 
-            [(ngModel)]="sparenUndSchulden20" 
+            [value]="(sparenUndSchulden20 | number: '1.2-2')" 
             labelPlacement="stacked" 
-            placeholder="wird berechnet"
             disabled>
           </ion-input>
         </ion-item>
@@ -53,21 +51,20 @@
         <ion-item>
           <ion-input 
             label="Lifestyle/Investments (10%)" 
-            [(ngModel)]="lifestyleInvestments10" 
+            [value]="(lifestyleInvestments10 | number: '1.2-2')" 
             labelPlacement="stacked" 
-            placeholder="wird berechnet"
             disabled>
           </ion-input>
         </ion-item>
       </ion-list>
 
-      <ion-toggle [(ngModel)]="showKategorien" style="margin-top: 16px;">
+      <ion-toggle [(ngModel)]="zeigeKategorien" style="margin-top: 16px;">
         <ion-label>Detaillierte Kategorien anzeigen</ion-label>
       </ion-toggle>
     </ion-card-content>
   </ion-card>
 
-  <ion-card *ngIf="showKategorien" style="margin: 16px;">
+  <ion-card *ngIf="zeigeKategorien" style="margin: 16px;">
     <ion-card-header>
       <ion-card-title>Detaillierte Aufteilung (70%)</ion-card-title>
     </ion-card-header>
@@ -77,8 +74,7 @@
         <ion-item>
           <ion-input 
             label="Wohnen (40%)" 
-            [(ngModel)]="Wohnen" 
-            labelPlacement="stacked" 
+            [value]="(wohnen | number: '1.2-2')" 
             disabled>
           </ion-input>
         </ion-item>
@@ -86,8 +82,7 @@
         <ion-item>
           <ion-input 
             label="Essen (20%)" 
-            [(ngModel)]="Essen" 
-            labelPlacement="stacked" 
+            [value]="(essen | number: '1.2-2')" 
             disabled>
           </ion-input>
         </ion-item>
@@ -95,8 +90,7 @@
         <ion-item>
           <ion-input 
             label="Transport (15%)" 
-            [(ngModel)]="Transport" 
-            labelPlacement="stacked" 
+            [value]="(transport | number: '1.2-2')" 
             disabled>
           </ion-input>
         </ion-item>
@@ -104,8 +98,7 @@
         <ion-item>
           <ion-input 
             label="Nebenkosten (15%)" 
-            [(ngModel)]="Nebenkosten" 
-            labelPlacement="stacked" 
+            [value]="(nebenkosten | number: '1.2-2')" 
             disabled>
           </ion-input>
         </ion-item>
@@ -113,12 +106,29 @@
         <ion-item>
           <ion-input 
             label="Versicherungen (10%)" 
-            [(ngModel)]="Versicherungen" 
-            labelPlacement="stacked" 
+            [value]="(versicherungen | number: '1.2-2')" 
             disabled>
           </ion-input>
         </ion-item>
       </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card style="margin: 16px;">
+    <ion-card-header>
+      <ion-card-title>Kommentare</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-item>
+        <ion-textarea 
+          label="Notizen zu dieser Berechnung" 
+          [(ngModel)]="kommentar"
+          placeholder="z.B. Sparpläne für Q1..."
+          rows="4"
+          labelPlacement="stacked">
+        </ion-textarea>
+      </ion-item>
     </ion-card-content>
   </ion-card>
 

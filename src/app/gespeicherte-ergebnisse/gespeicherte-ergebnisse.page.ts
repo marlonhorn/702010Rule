@@ -11,28 +11,28 @@ export class GespeicherteErgebnissePage implements OnInit {
 
   public rechnungen: Rechnung[] = [];
 
-  constructor(private speicher: Speicher) { }
+  constructor(private speicher: Speicher) {}
 
   ngOnInit() {
-    this.loadRechnungen();
+    this.rechnungenLaden();
   }
 
   ionViewWillEnter() {
-    this.loadRechnungen();
+    this.rechnungenLaden();
   }
 
-  public loadRechnungen() {
+  public rechnungenLaden() {
     this.rechnungen = this.speicher.getRechnungen();
   }
 
-  public async deleteRechnung(id: string) {
-    await this.speicher.deleteRechnung(id);
-    this.loadRechnungen();
+  public async rechnungLoeschen(id: string) {
+    await this.speicher.rechnungLoeschen(id);
+    this.rechnungenLaden();
   }
 
-  public async deleteAll() {
-    await this.speicher.deleteAll();
-    this.loadRechnungen();
+  public async alleLoeschen() {
+    await this.speicher.alleLoeschen();
+    this.rechnungenLaden();
   }
 
 }

@@ -1,14 +1,132 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>hilfetext</ion-title>
+    <ion-title>Info & Hilfe</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="false">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">hilfetext</ion-title>
+      <ion-title size="large">Hilfe & Informationen</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <ion-card style="margin: 16px;">
+    <ion-card-header>
+      <ion-card-title>📊 Die 70/20/10 Regel</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>Die <strong>70/20/10 Regel</strong> ist eine Budgetierungsmethode zur optimalen Verteilung deines Einkommens:</p>
+      
+      <ion-list>
+        <ion-item lines="none">
+          <ion-label>
+            <strong>70% - Wesentliche Kosten</strong><br/>
+            <small>Lebenshaltungskosten wie Wohnen, Essen, Transport, Nebenkosten und Versicherungen</small>
+          </ion-label>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label>
+            <strong>20% - Sparen & Schulden</strong><br/>
+            <small>Geld für Ersparnisse, Notfallfonds und Schuldenabbau</small>
+          </ion-label>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label>
+            <strong>10% - Lifestyle & Investments</strong><br/>
+            <small>Freizeit, Unterhaltung, Hobbys und Investitionen</small>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card style="margin: 16px;">
+    <ion-card-header>
+      <ion-card-title>🎯 Detaillierte Aufteilung der 70%</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>Die 70% werden wie folgt aufgeteilt:</p>
+      
+      <ion-list>
+        <ion-item lines="none">
+          <ion-label>
+            <strong>40%</strong> - Wohnen (Miete, Hypothek, Nebenkosten)
+          </ion-label>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label>
+            <strong>20%</strong> - Essen (Lebensmittel, Restaurants)
+          </ion-label>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label>
+            <strong>15%</strong> - Transport (Auto, öffentliche Verkehrsmittel)
+          </ion-label>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label>
+            <strong>15%</strong> - Nebenkosten (Strom, Wasser, Internet, Telefon)
+          </ion-label>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label>
+            <strong>10%</strong> - Versicherungen (Kranken-, Haftpflicht-, Hausratversicherung)
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card style="margin: 16px;">
+    <ion-card-header>
+      <ion-card-title>📱 Bedienung der App</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p><strong>Schritt 1: Berechnung starten</strong></p>
+      <ul>
+        <li>Gehe zum Tab <strong>"Berechnen"</strong></li>
+        <li>Wähle deine Einkommenshäufigkeit (monatlich oder jährlich)</li>
+        <li>Gib dein Nettoeinkommen ein</li>
+        <li>Optional: Aktiviere "Kategorien anzeigen" für detaillierte Aufteilung</li>
+        <li>Klicke auf <strong>"Berechnen"</strong></li>
+      </ul>
+
+      <p style="margin-top: 16px;"><strong>Schritt 2: Ergebnisse ansehen</strong></p>
+      <ul>
+        <li>Du siehst die Aufteilung in die 3 Hauptkategorien (70/20/10)</li>
+        <li>Die Beträge werden automatisch berechnet und angezeigt</li>
+        <li>Bei Bedarf kannst du dein Einkommen anpassen und neu berechnen</li>
+      </ul>
+
+      <p style="margin-top: 16px;"><strong>Schritt 3: Ergebnis speichern</strong></p>
+      <ul>
+        <li>Klicke auf <strong>"Speichern"</strong>, um deine Berechnung zu speichern</li>
+        <li>Du erhältst eine Bestätigung (grüne Meldung)</li>
+        <li>Alle gespeicherten Rechnungen findest du im Tab <strong>"Datenbank"</strong></li>
+      </ul>
+
+      <p style="margin-top: 16px;"><strong>Schritt 4: Datenbank verwalten</strong></p>
+      <ul>
+        <li>Im Tab <strong>"Datenbank"</strong> siehst du alle bisherigen Berechnungen</li>
+        <li>Klicke auf den <strong>Mülleimer-Button</strong>, um eine Berechnung zu löschen</li>
+        <li>Mit <strong>"Alle löschen"</strong> entfernst du alle gespeicherten Daten</li>
+      </ul>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card style="margin: 16px; margin-bottom: 32px;">
+    <ion-card-header>
+      <ion-card-title>💡 Tipps</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ul>
+        <li><strong>Nettoeinkommen verwenden:</strong> Gib dein Einkommen nach Steuern und Sozialabgaben ein</li>
+        <li><strong>Regelmäßig überprüfen:</strong> Speichere regelmäßig Berechnungen, um deine Ausgaben zu tracken</li>
+        <li><strong>Flexibel bleiben:</strong> Die 70/20/10 Regel ist ein Richtwert, nicht in Stein gemeißelt</li>
+        <li><strong>Detaillierte Kategorien:</strong> Nutze die optionale Kategorien-Anzeige für eine präzisere Planung</li>
+      </ul>
+    </ion-card-content>
+  </ion-card>
 
 </ion-content>

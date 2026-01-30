@@ -10,9 +10,10 @@ import { AlertController, NavController } from '@ionic/angular';
 })
 export class HomePage {
 
-  public einkommenNetto: number = 0;
+  public einkommenNetto: number | null = null;
+  public einkommenNettoFormatted: string = '';
   public frequenz: string = 'monthly';
-  public showKategorien: boolean = false;
+  public zeigeKategorien: boolean = false;
 
   constructor(private alertController: AlertController,
               private navCtrl: NavController) {}
@@ -22,31 +23,39 @@ export class HomePage {
   }
 
   public reset() {
-    this.einkommenNetto = 0;
+    this.einkommenNetto = null;
+    this.einkommenNettoFormatted = '';
     this.frequenz = 'monthly';
-    this.showKategorien = false;
+    this.zeigeKategorien = false;
+  }
+
+  public formatierePunkteEingabe(eingabe: string) {
+    const ohneFormatierung = eingabe.replace(/\./g, '');
+    const alsZahl = parseFloat(ohneFormatierung) || null;
+    this.einkommenNetto = alsZahl;
+    
+    if (ohneFormatierung) {
+      const formatiert = ohneFormatierung.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+      this.einkommenNettoFormatted = formatiert;
+    }
   }
 
   public berechnen() {
-    // Validierung: Prüfe ob Wert leer ist
     if (this.einkommenNetto === 0 || this.einkommenNetto === undefined || this.einkommenNetto === null) {
       this.showAlert('Fehler', 'Bitte geben Sie ein Einkommen ein!');
       return;
     }
 
-    // Validierung: Prüfe ob Wert eine positive Zahl ist
     if (isNaN(this.einkommenNetto)) {
       this.showAlert('Fehler', 'Das Einkommen muss eine gültige Zahl sein!');
       return;
     }
 
-    // Validierung: Prüfe ob Wert negativ ist
     if (this.einkommenNetto < 0) {
       this.showAlert('Fehler', 'Das Einkommen kann nicht negativ sein!');
       return;
     }
 
-    // Validierung: Prüfe ob Wert zu hoch ist
     if (this.einkommenNetto > 1000000) {
       this.showAlert('Fehler', 'Das Einkommen ist zu hoch! Bitte geben Sie einen realistischen Wert ein. (<= 1.000.000)');
       return;
@@ -54,18 +63,16 @@ export class HomePage {
 
     let einkommen = this.einkommenNetto;
 
-    // Wenn jährlich ausgewählt, zu monatlich umrechnen
     if (this.frequenz === 'annual') {
       einkommen = this.einkommenNetto / 12;
     }
     console.log('Einkommen für Berechnung:', einkommen);
-    
-    // Navigiere zur Ergebnis-Seite und übergebe die Daten
+
     this.navCtrl.navigateForward('/ergebnis', {
       queryParams: {
         einkommen: einkommen,
         frequenz: this.frequenz,
-        showKategorien: String(this.showKategorien)
+        zeigeKategorien: String(this.zeigeKategorien)
       }
     });
   }
@@ -80,18 +87,5 @@ export class HomePage {
   }
 
 }
-
-  
-
-
-
-
-
-
-
-
-
-
-
 
 

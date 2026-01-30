@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NavController } from '@ionic/angular';
+import { NavController, ToastController } from '@ionic/angular';
 import { Speicher, Rechnung } from '../speicher';
 
 @Component({
@@ -18,44 +18,43 @@ export class ErgebnisPage implements OnInit {
   public sparenUndSchulden20: number = 0;
   public lifestyleInvestments10: number = 0;
 
-  public Wohnen: number = 0;
-  public Essen: number = 0;
-  public Transport: number = 0;
-  public Nebenkosten: number = 0;
-  public Versicherungen: number = 0;
+  public wohnen: number = 0;
+  public essen: number = 0;
+  public transport: number = 0;
+  public nebenkosten: number = 0;
+  public versicherungen: number = 0;
 
-  public showKategorien: boolean = false;
-  public frequenz: string = 'monthly';
+  public zeigeKategorien: boolean = false;
+  public kommentar: string = '';
 
   constructor(
   private speicher: Speicher,
   private activatedRoute: ActivatedRoute,
-  private navCtrl: NavController
+  private navCtrl: NavController,
+  private toastController: ToastController
 ) {}
 
   ngOnInit() {
     this.activatedRoute.queryParams.subscribe(params => {
       if (params['einkommen']) {
-        this.einkommenNetto = parseFloat(params['einkommen']);
-        this.frequenz = params['frequenz'] || 'monthly';
-        this.showKategorien = params['showKategorien'] === 'true';
-        this.calcPercentiles100();
+        this.einkommenNetto = parseFloat(parseFloat(params['einkommen']).toFixed(2));
+        this.zeigeKategorien = params['zeigeKategorien'] === 'true';
+        this.berechneAufteilung();
       }
     });
   }
 
-  public calcPercentiles100() {
+  public berechneAufteilung() {
     this.gesamterGrundbedarf70 = parseFloat((this.einkommenNetto * 0.7).toFixed(2));
     this.sparenUndSchulden20 = parseFloat((this.einkommenNetto * 0.2).toFixed(2));
     this.lifestyleInvestments10 = parseFloat((this.einkommenNetto * 0.1).toFixed(2));
-    this.Wohnen = parseFloat((this.gesamterGrundbedarf70 * 0.4).toFixed(2));
-    this.Essen = parseFloat((this.gesamterGrundbedarf70 * 0.2).toFixed(2));
-    this.Transport = parseFloat((this.gesamterGrundbedarf70 * 0.15).toFixed(2));
-    this.Nebenkosten = parseFloat((this.gesamterGrundbedarf70 * 0.15).toFixed(2));
-    this.Versicherungen = parseFloat((this.gesamterGrundbedarf70 * 0.1).toFixed(2));
+    this.wohnen = parseFloat((this.gesamterGrundbedarf70 * 0.4).toFixed(2));
+    this.essen = parseFloat((this.gesamterGrundbedarf70 * 0.2).toFixed(2));
+    this.transport = parseFloat((this.gesamterGrundbedarf70 * 0.15).toFixed(2));
+    this.nebenkosten = parseFloat((this.gesamterGrundbedarf70 * 0.15).toFixed(2));
+    this.versicherungen = parseFloat((this.gesamterGrundbedarf70 * 0.1).toFixed(2));
   }
 
-  
   public async speichernRechnung() {
     const rechnung: Rechnung = {
       id: Date.now().toString(),
@@ -63,29 +62,38 @@ export class ErgebnisPage implements OnInit {
       gesamterGrundbedarf70: this.gesamterGrundbedarf70,
       sparenUndSchulden20: this.sparenUndSchulden20,
       lifestyleInvestments10: this.lifestyleInvestments10,
-      Wohnen: this.Wohnen,
-      Essen: this.Essen,
-      Transport: this.Transport,
-      Nebenkosten: this.Nebenkosten,
-      Versicherungen: this.Versicherungen,
-      datum: new Date()
+      wohnen: this.wohnen,
+      essen: this.essen,
+      transport: this.transport,
+      nebenkosten: this.nebenkosten,
+      versicherungen: this.versicherungen,
+      datum: new Date(),
+      zeigeKategorien: this.zeigeKategorien,
+      kommentar: this.kommentar
     };
 
     await this.speicher.addRechnung(rechnung);
-    console.log('Rechnung gespeichert!');
-  }
     
+    const toast = await this.toastController.create({
+      message: 'Rechnung erfolgreich gespeichert! ✅',
+      duration: 2000,
+      position: 'bottom',
+      color: 'success'
+    });
+    await toast.present();
+  }
 
   public neuLaden() {
     this.einkommenNetto = 0;
     this.gesamterGrundbedarf70 = 0;
     this.sparenUndSchulden20 = 0;
     this.lifestyleInvestments10 = 0;
-    this.Wohnen = 0;
-    this.Essen = 0;
-    this.Transport = 0;
-    this.Nebenkosten = 0;
-    this.Versicherungen = 0;
+    this.wohnen = 0;
+    this.essen = 0;
+    this.transport = 0;
+    this.nebenkosten = 0;
+    this.versicherungen = 0;
+    this.kommentar = '';
     this.navCtrl.navigateBack('/home');
   }
 

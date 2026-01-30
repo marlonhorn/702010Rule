@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-hilfetext',
@@ -6,11 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./hilfetext.page.scss'],
   standalone: false,
 })
-export class HilfetextPage implements OnInit {
+export class HilfetextPage {
 
   constructor() { }
-
-  ngOnInit() {
-  }
 
 }
