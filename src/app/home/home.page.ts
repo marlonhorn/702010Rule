@@ -4,7 +4,7 @@ import { AlertController, NavController } from '@ionic/angular';
 enum Haeufigkeit {
   MONATLICH = 'monthly',
   JAEHRLICH = 'annual'
-}
+} 
 
 @Component({
   selector: 'app-home',
